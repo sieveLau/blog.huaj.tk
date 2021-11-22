@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.huaj.tk","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="所有玩家获得每级+4%伤害   力量：所有伤害+5%   敏捷：+1先攻，+3%移动速度，+1%闪避。敏捷高于敌人时，每7点增加攻击、指向性法术的双重攻击概率   智力：+1%使用技能时重置所有技能冷却的几率。智力高于敌人时，每7点增加施加于敌人的状态的持续时间1回合   体质：+5%双甲，+10%血   智慧：+1%命中率，+3%暴击率，+0.5%攻击和技能范围">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attribute Insanity 3.0修改备忘录">
+<meta property="og:url" content="https://blog.huaj.tk/2021/11/22/Attribute-Insanity-3-0%E4%BF%AE%E6%94%B9%E5%A4%87%E5%BF%98%E5%BD%95/index.html">
+<meta property="og:site_name" content="Nest">
+<meta property="og:description" content="所有玩家获得每级+4%伤害   力量：所有伤害+5%   敏捷：+1先攻，+3%移动速度，+1%闪避。敏捷高于敌人时，每7点增加攻击、指向性法术的双重攻击概率   智力：+1%使用技能时重置所有技能冷却的几率。智力高于敌人时，每7点增加施加于敌人的状态的持续时间1回合   体质：+5%双甲，+10%血   智慧：+1%命中率，+3%暴击率，+0.5%攻击和技能范围">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-22T10:12:18.000Z">
+<meta property="article:modified_time" content="2021-11-22T10:51:54.871Z">
+<meta property="article:author" content="Sieve Lau">
+<meta property="article:tag" content="游戏">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.huaj.tk/2021/11/22/Attribute-Insanity-3-0%E4%BF%AE%E6%94%B9%E5%A4%87%E5%BF%98%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Attribute Insanity 3.0修改备忘录 | Nest</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nest</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.huaj.tk/2021/11/22/Attribute-Insanity-3-0%E4%BF%AE%E6%94%B9%E5%A4%87%E5%BF%98%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Sieve Lau">
+      <meta itemprop="description" content="一个小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nest">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Attribute Insanity 3.0修改备忘录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-22 18:12:18 / 修改时间：18:51:54" itemprop="dateCreated datePublished" datetime="2021-11-22T18:12:18+08:00">2021-11-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>  所有玩家获得每级+4%伤害</li>
+<li>  力量：所有伤害+5%</li>
+<li>  敏捷：+1先攻，+3%移动速度，+1%闪避。敏捷高于敌人时，每7点增加攻击、指向性法术的双重攻击概率</li>
+<li>  智力：+1%使用技能时重置所有技能冷却的几率。智力高于敌人时，每7点增加施加于敌人的状态的持续时间1回合</li>
+<li>  体质：+5%双甲，+10%血</li>
+<li>  智慧：+1%命中率，+3%暴击率，+0.5%攻击和技能范围</li>
+</ul>
+<hr>
+<ul>
+<li>  领袖：+7%几率将盟友施加于领袖的状态与领袖光环内的角色共享（每个角色单独roll几率）。领袖本身也能获得这个反向效果。</li>
+<li>  坚毅：+5%几率将敌人施加的状态施加回去。护甲恢复提升至10%每点。每回合开始时每1点回复2%最大护甲值。</li>
+<li>  报复：+5%几率回合结束时嘲讽附近角色</li>
+</ul>
+<hr>
+<ul>
+<li><p>  大气学派：+5%雷抗，+3%几率使用技能或攻击时电击20m内的敌人（每个角色单独roll）</p>
+</li>
+<li><p>  地卜学派：+5%大地、毒素抗性，攻击和法术恢复3%物甲，在油上跑得更快。护甲恢复提升至7%</p>
+</li>
+<li><p>  神射技艺：+10%回合结束时潜行几率。如果已经潜行，效果会变成隐身。几率超过100%时也会有几率直接隐身。NPC没有这个效果。</p>
+</li>
+<li><p>  水占学派：+5%冰抗，攻击和法术治疗友军2%。护甲恢复提升至7%，治疗量提升至8%</p>
+</li>
+<li><p>  烈火学派：+5%火抗，攻击或指向性法术有1.5%几率恢复1ap。站在火或诅咒火上时效果翻倍。</p>
+</li>
+<li><p>  刺杀学派：潜行时进行攻击或指向性法术，+5%几率缴械，+5%几率致盲（穿透护甲）</p>
+</li>
+<li><p>  战场技艺：增加“Chain Pull”技能，可以将敌人拉到面前。每级增加技能范围和加快冷却，高等级时附加致残和流血。</p>
+</li>
+<li><p>  死灵学派：+3%几率将死了的敌人操纵3回合。+10%生命偷取</p>
+</li>
+<li><p>召唤学派：召唤物继承召唤者一半的技能等级（向上取整）以及被动效果。其他与原版一致（初始+10%体力、伤害、双甲）</p>
+<hr>
+</li>
+<li><p>  单手：每级解锁1个虚空法术。回合开始时以及使用虚空法术时，会随机抽取另一个虚空法术来替代这个。虚空法术一共10个。</p>
+</li>
+<li><p>  双手：+5%生命值损失时劈斩附近所有的角色。需要1个近战武器</p>
+</li>
+<li><p>  双持：+2%闪避率。受到伤害时该数值变为+4%，直到闪避了一次攻击。如果副手为空，该数值翻倍。</p>
+</li>
+<li><p>  远程：+4%几率打断敌人的施法（武器种类不限）。后续打断的几率以4%递减。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Attribute changes</strong></p>
+<ul>
+<li>  <strong>New!</strong> All players gain +4% damage per level.</li>
+<li>  <strong>Strength -&gt; Might:</strong> +5% damage to all attacks.</li>
+<li>  <strong>Finesse -&gt; Speed:</strong> +1 initiative, +3% movement speed, +1% dodging. Your attacks and targetted spells may repeat up to once per turn per each 7 Speed you have more than your target.</li>
+<li>  <strong>Intelligence -&gt; Magic:</strong> 1% chance to reset all cooldowns on skill use. Status effects you apply will increase duration by 1 turn per every 7 Magic more you have than your opponent.</li>
+<li>  <strong>Constitution -&gt; Endurance:</strong> +5% armor (both types), +10% hp per point.</li>
+<li>  <strong>Wits -&gt; Perception:</strong> +1% accuracy, +3% crit chance, +0.5% character range.</li>
+<li>  No more overrides necessary for class mods!</li>
+</ul>
+<p><strong>Existing Ability changes</strong></p>
+<ul>
+<li>  <strong>All abilities:</strong> All abilities no longer grant direct damage increases. Instead, they grant various special effects.</li>
+<li>  <strong>Leadership:</strong> Grants a 7% chance per point to share statuses applied by allies to the leader with other characters in the leadership aura, rolled once per character. The leader also has a 7% chance per point to gain statuses applied to followers.</li>
+<li>  <strong>Perseverance:</strong> 5% chance to share enemy-induced status effects with the sender per point. Armor recovery increased to 10% per point. Furthermore, recovers 2% max armor per point on turn start.</li>
+<li>  <strong>Retribution:</strong> 5% chance to taunt nearby characters at end of turn per point.</li>
+<li>  <strong>Aerothurge:</strong> +5% air resistance, 3% chance per point to shock each enemy (rolled per character) within 20m upon using a skill or an attack.</li>
+<li>  <strong>Geomancer:</strong> +5% earth and poison resistance, attacks and spells restore 3% physical armor, move 8% faster in oil per point. Armor restore percentage increased to 7% (from 5%).</li>
+<li>  <strong>Huntsman:</strong> +10% chance to sneak at end of turn per point. If the player is already sneaking, this becomes invisibility. Scores higher than 100% chance start proccing a chance to become invisible instead. NPCs do not benefit from this trait.</li>
+<li>  <strong>Hydrosophist:</strong> +5% water resistance, your attacks and spells heal nearby allies 2% per point. Armor restore percentage increased to 7% and healing restore percentage increased to 8% (both from 5%).</li>
+<li>  <strong>Pyrokinetic:</strong> +5% fire resistance, 1.5% chance for attacks and spells targetted at characters to restore 1ap per point. Doubled while standing in fire or necrofire.</li>
+<li>  <strong>Scoundrel:</strong> +5% chance to disarm and/or blind a foe (through armour) with attacks and targetted spells while sneaking (both statuses separately rolled).</li>
+<li>  <strong>Warfare:</strong> Gains “Chain Pull” during combat, a skill which pulls enemies to your position. Increases range and decreases cooldown with each level. Cripples and Bleeds at higher levels.</li>
+<li>  <strong>Necromancer:</strong> Grants a 3% chance per point to raise killed enemies from the dead for 3 turns. (This exists on top of vanilla’s 10% lifesteal)</li>
+<li>  <strong>Summoning:</strong> Summons now inherit half the Ability levels (rounding up), and subsequently the passive effects, of their owner. This occurs regardless of your skill in Summoning, which has itself remained the same.</li>
+<li>  <strong>Polymorph:</strong> Grants a 6% chance per point to shed all enemy-applied status effects upon application. No longer grants attribute points. <strong>To avoid bugs, please only add Polymorph points outside of respec. Character creation is fine.</strong></li>
+<li>  <strong>Dual-wielding -&gt; Duelist:</strong> Grants 2% dodging in combat per point. Taking damage increases the bonus by 2% per point until the Duelist evades an attack, at which point the bonus will reset. This bonus is doubled for characters with an empty off-hand.</li>
+<li>  <strong>Two-handed -&gt; Berserk:</strong> Provides the character with a 5% chance to cleave all nearby characters (including allies) upon taking vitality damage. Only works with melee weapons.</li>
+<li>  <strong>Ranged -&gt; Specialist:</strong> Grants the specialist a 4% chance per point to interrupt enemy spells with a flashy weapon attack (works with melee weapons too!). Each subsequent interrupt has a -4% less chance to occur. Enemies do not benefit.</li>
+<li>  <strong>Single-handed -&gt; Voidtouched:</strong> Voidtouched grants the player access to 10 mysterious and powerful new spells that draw upon the Void’s power. Every time you begin a turn in combat or use a Voidtouched skill, you’ll gain access to a new skill chosen at random. Each point in Voidtouched unlocks new and more powerful spells.</li>
+</ul>
+<p><strong>Civil ability changes</strong></p>
+<ul>
+<li>  <strong>Sneaking:</strong> Vastly increased movement speed while sneaking per point. (Hint: You can reach speeds faster than normal walking even without gear.)</li>
+</ul>
+<p><strong>Misc changes (including issue fixes from previous versions)</strong></p>
+<ul>
+<li>  As a natural consequence of Might multiplying all outgoing damage, grenades now scale with character stats!</li>
+<li>  Global crit multiplier is now 200%.</li>
+<li>  Sneaking now costs 2AP.</li>
+<li>  Damage from low ground now decreased by 20% and damage from high ground now increased by 30% (originals were 10% and 20% respectively).</li>
+<li>  Global range boost cap raised to 35 from 30.</li>
+<li>  Speed no longer overrides Crippled or Entangled. Be warned that any mod that overrides either status (none exist that I am aware of) will unfix this.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"># 游戏</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/21/%E4%BB%8A%E6%97%A5%E5%8D%95%E8%BD%A6%E8%BF%9C%E8%A1%8C/" rel="prev" title="今日单车远行">
+      <i class="fa fa-chevron-left"></i> 今日单车远行
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Sieve Lau</p>
+  <div class="site-description" itemprop="description">一个小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sieve Lau</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
